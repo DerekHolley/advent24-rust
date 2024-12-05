@@ -26,7 +26,7 @@ fn main () {
 
     let now = time::Instant::now();
     let raster = Raster{
-        arr: contents.chars().collect(),
+        arr: contents.chars().filter(|n|{*n != '\n'}).collect(),
         width: contents.find('\n').unwrap(),
     };
 
@@ -35,7 +35,7 @@ fn main () {
 
     let len = raster.arr.len();
     for i in 0..len {
-
+        
         let x = i % (raster.width as usize);
         let y = i / (raster.width as usize);
 
@@ -98,16 +98,16 @@ fn search_direction(raster: &Raster, x:usize,y:usize,dir_x:isize,dir_y:isize) ->
 }
 
 fn search_part_2(raster: &Raster, x:usize,y:usize) -> bool {
-    if !raster.check(x as isize - 1, y as isize - 1, 'M') && !raster.check(x as isize + 1, y as isize - 1, 'M') && !raster.check(x as isize - 1, y as isize + 1, 'S') && !raster.check(x as isize + 1, y as isize + 1, 'S') {
+    if raster.check(x as isize - 1, y as isize - 1, 'M') && raster.check(x as isize + 1, y as isize - 1, 'M') && raster.check(x as isize - 1, y as isize + 1, 'S') && raster.check(x as isize + 1, y as isize + 1, 'S') {
         return true;
     }
-    if !raster.check(x as isize - 1, y as isize - 1, 'M') && !raster.check(x as isize + 1, y as isize - 1, 'S') && !raster.check(x as isize - 1, y as isize + 1, 'M') && !raster.check(x as isize + 1, y as isize + 1, 'S') {
+    if raster.check(x as isize - 1, y as isize - 1, 'M') && raster.check(x as isize + 1, y as isize - 1, 'S') && raster.check(x as isize - 1, y as isize + 1, 'M') && raster.check(x as isize + 1, y as isize + 1, 'S') {
         return true;
     }
-    if !raster.check(x as isize - 1, y as isize - 1, 'S') && !raster.check(x as isize + 1, y as isize - 1, 'S') && !raster.check(x as isize - 1, y as isize + 1, 'M') && !raster.check(x as isize + 1, y as isize + 1, 'M') {
+    if raster.check(x as isize - 1, y as isize - 1, 'S') && raster.check(x as isize + 1, y as isize - 1, 'S') && raster.check(x as isize - 1, y as isize + 1, 'M') && raster.check(x as isize + 1, y as isize + 1, 'M') {
         return true;
     }
-    if !raster.check(x as isize - 1, y as isize - 1, 'S') && !raster.check(x as isize + 1, y as isize - 1, 'M') && !raster.check(x as isize - 1, y as isize + 1, 'S') && !raster.check(x as isize + 1, y as isize + 1, 'M') {
+    if raster.check(x as isize - 1, y as isize - 1, 'S') && raster.check(x as isize + 1, y as isize - 1, 'M') && raster.check(x as isize - 1, y as isize + 1, 'S') && raster.check(x as isize + 1, y as isize + 1, 'M') {
         return true;
     }
     return false;
