@@ -3,6 +3,7 @@ use std::fs;
 use adv02::{is_line_safe, is_line_safe_buffered};
 
 fn main() {
+    let now = std::time::Instant::now();
     let contents = match fs::read_to_string("./input.txt"){
         Ok(file) => file,
         Err(e) => panic!("Failed to open file: {:?}", e)
@@ -26,5 +27,6 @@ fn main() {
         }
     });
 
-    print!("Safe line count: {}\nSafe buffered line count: {}\n", safe_line_count, safe_buffered_line_count)
+    print!("Safe line count: {}\nSafe buffered line count: {}\n", safe_line_count, safe_buffered_line_count);
+    print!("Took: {:?}", now.elapsed());
 }
