@@ -24,6 +24,8 @@ fn main() {
         line.split(',').map(|n| -> usize { n.parse().unwrap() }).collect()
     });
 
+    print!("Parsing took: {:?}\n", now.elapsed());
+
     let mut sum_of_valid_sequences:usize = 0;
     let mut sum_of_invalid_sequences:usize = 0;
     sequences.for_each(|mut sequence| {
@@ -45,7 +47,7 @@ fn main() {
 
         }
     });
-    print!("Analysis took: {:?}\n", now.elapsed());
+    print!("Total analysis took: {:?}\n", now.elapsed());
     print!("Sum of middles of valid sequences: {:?}\n", sum_of_valid_sequences);
     print!("Sum of middles of corrected sequences: {:?}\n", sum_of_invalid_sequences);
 }
